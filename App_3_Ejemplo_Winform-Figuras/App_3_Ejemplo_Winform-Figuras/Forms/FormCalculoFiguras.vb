@@ -30,4 +30,23 @@
 
 
     End Sub
+
+    Private Sub NumRadio3_ValueChanged(sender As Object, e As EventArgs) Handles NumRadio3.ValueChanged
+        Dim circulo As Circulo = New Circulo(NumRadio3.Value)
+        NumRec3.Value = NumRadio3.Value * NumRadio3.Value * Math.PI
+        NumPerimetroCirc3.Value = NumRadio3.Value * 2 * CSng(Math.PI)
+    End Sub
+
+    Private Sub FormCalculoFiguras_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        MessageBox.Show("Evento FomCalculoFiguras_Load")
+    End Sub
+
+    Private Sub FormCalculoFiguras_Closing(ByVal sender As Object, ByVal e As System.ComponentModel.CancelEventArgs) Handles MyBase.Closing
+        Dim resultado As DialogResult
+        resultado = MessageBox.Show("¿Cerras la ventana?", " Atencion", MessageBoxButtons.YesNo, MessageBoxIcon.Hand)
+
+        If resultado = DialogResult.No Then
+            e.Cancel = True
+        End If
+    End Sub
 End Class
