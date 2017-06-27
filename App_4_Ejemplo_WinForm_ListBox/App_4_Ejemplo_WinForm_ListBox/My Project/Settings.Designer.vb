@@ -64,9 +64,9 @@ Namespace My
     Friend Module MySettingsProperty
 
         <Global.System.ComponentModel.Design.HelpKeywordAttribute("My.Settings")> _
-        Friend ReadOnly Property Settings() As Global.APP_4_windowsForm_ListBox.My.MySettings
+        Friend ReadOnly Property Settings() As Global.App_4_Ejemplo_WinForm_ListBox.My.MySettings
             Get
-                Return Global.APP_4_windowsForm_ListBox.My.MySettings.Default
+                Return Global.App_4_Ejemplo_WinForm_ListBox.My.MySettings.Default
             End Get
         End Property
     End Module

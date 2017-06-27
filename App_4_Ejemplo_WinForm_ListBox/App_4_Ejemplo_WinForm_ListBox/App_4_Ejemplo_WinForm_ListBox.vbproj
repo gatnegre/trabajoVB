@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{E6C9BBD8-8E6D-422E-9D02-D46C07D6E2EC}</ProjectGuid>
+    <ProjectGuid>{18DDE996-9AC2-4BE3-BD40-5F70A824932A}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <StartupObject>APP_4_windowsForm_ListBox.My.MyApplication</StartupObject>
-    <RootNamespace>APP_4_windowsForm_ListBox</RootNamespace>
-    <AssemblyName>APP_4_windowsForm_ListBox</AssemblyName>
+    <StartupObject>App_4_Ejemplo_WinForm_ListBox.My.MyApplication</StartupObject>
+    <RootNamespace>App_4_Ejemplo_WinForm_ListBox</RootNamespace>
+    <AssemblyName>App_4_Ejemplo_WinForm_ListBox</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MyType>WindowsForms</MyType>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
@@ -21,7 +21,7 @@
     <DefineDebug>true</DefineDebug>
     <DefineTrace>true</DefineTrace>
     <OutputPath>bin\Debug\</OutputPath>
-    <DocumentationFile>APP_4_windowsForm_ListBox.xml</DocumentationFile>
+    <DocumentationFile>App_4_Ejemplo_WinForm_ListBox.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -31,7 +31,7 @@
     <DefineTrace>true</DefineTrace>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
-    <DocumentationFile>APP_4_windowsForm_ListBox.xml</DocumentationFile>
+    <DocumentationFile>App_4_Ejemplo_WinForm_ListBox.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
   </PropertyGroup>
   <PropertyGroup>
