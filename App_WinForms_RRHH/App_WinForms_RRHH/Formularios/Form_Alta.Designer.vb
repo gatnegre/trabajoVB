@@ -137,12 +137,13 @@ Partial Class Form_Alta
         '
         'Label5
         '
+        Me.Label5.AutoEllipsis = True
         Me.Label5.Location = New System.Drawing.Point(26, 194)
         Me.Label5.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(100, 30)
+        Me.Label5.Size = New System.Drawing.Size(100, 26)
         Me.Label5.TabIndex = 11
-        Me.Label5.Text = "Retribución:"
+        Me.Label5.Text = "Retribución fija:"
         '
         'Form_Alta
         '
