@@ -7,12 +7,20 @@
         Public categoria As TipoCategoria
         Public retribucionFija As Single
 
+        'Public Sub New()
+        '    nombre = ""
+        '    apellidos = ""
+        '    genero = TipoGenero.Hermafrodita
+        '    categoria = TipoCategoria.Administrativo
+        '    retribucionFija = 0
+        'End Sub
         ' Constructor
-        Public Sub New(nuevoNombre As String, nuevoApell As String, nuevoGenero As TipoGenero, nuevaCategoria As TipoCategoria)
+        Public Sub New(nuevoNombre As String, nuevoApell As String, nuevoGenero As TipoGenero, nuevaCategoria As TipoCategoria, nuevaRetribucion As Single)
             nombre = nuevoNombre
             apellidos = nuevoApell
             genero = nuevoGenero
             categoria = nuevaCategoria
+            retribucionFija = nuevaRetribucion
             Console.Write("Se ha creado el nuevo empleado " + nombre)
         End Sub
         Function NombreCompleto() As String
@@ -20,13 +28,14 @@
         End Function
         Function RellenarConRegistro(ByVal textoRegistro As String) As Boolean
 
-            Dim arrayCampos() As String = textoRegistro.Split(",")
+            Dim arrayCampos() As String = textoRegistro.Split(CType(",", Char))
 
-            If arrayCampos.Length = 4 Then
+            If arrayCampos.Length = 5 Then
                 nombre = arrayCampos(0)
                 apellidos = arrayCampos(1)
-                genero = Integer.Parse(arrayCampos(2))
-                categoria = Integer.Parse(arrayCampos(3))
+                genero = CType(Integer.Parse(arrayCampos(2)), TipoGenero)
+                categoria = CType(Integer.Parse(arrayCampos(3)), TipoCategoria)
+                retribucionFija = Single.Parse(arrayCampos(4))
                 Console.WriteLine(ToString())
                 Return True
             Else

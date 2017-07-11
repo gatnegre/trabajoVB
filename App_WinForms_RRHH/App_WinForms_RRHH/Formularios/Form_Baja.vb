@@ -1,31 +1,23 @@
 ﻿Imports App_WinForms_RRHH.Modelo
 Public Class Form_baja
 
-    Private frmLista As New Form_Lista
+    Private frmBusqueda As New Form_Busqueda
 
-
-    Public Sub AlActivarseFormulario(sender As Object, e As EventArgs) _
-        Handles Me.Activated
-
+    Public Sub AlActivarseFormulario(sender As Object, e As EventArgs) Handles Me.Activated
         Me.MdiParent.Text = "Baja empleado"
     End Sub
-    Public Sub AlDesactivarseFormulario(sender As Object, e As EventArgs) _
-        Handles Me.Deactivate
-
+    Public Sub AlDesactivarseFormulario(sender As Object, e As EventArgs) Handles Me.Deactivate
         Me.MdiParent.Text = "Aplicación empleados"
     End Sub
 
-    Private Sub BtnDarDEBaja_Click(sender As Object, e As EventArgs) Handles BtnDarDEBaja.Click
-
-        EmpleadosCRUD.Eliminar(frmLista.listaEmpleados)
+    Private Sub btnDarDeBaja_Click(sender As Object, e As EventArgs) Handles btnDarDeBaja.Click
+        EmpleadosCRUD.Eliminar(frmBusqueda.listaEmpleados)
     End Sub
 
-    Private Sub BtnBuscar_Click(sender As Object, e As EventArgs) Handles BtnBuscar.Click
-        frmLista.MdiParent = Me.MdiParent
-        frmLista.ShowDialog()
-        LstEmpleados.Items.Clear()
-        LstEmpleados.Items.AddRange(frmLista.LstListaEmpleados.Items)
-
-
+    Private Sub btnBuscar_Click(sender As Object, e As EventArgs) Handles btnBuscar.Click
+        'frmLista.MdiParent = Me.MdiParent
+        frmBusqueda.ShowDialog(Me)
+        lstEmpleados.Items.Clear()
+        lstEmpleados.Items.AddRange(frmBusqueda.lstListaEmpleados.Items)
     End Sub
 End Class

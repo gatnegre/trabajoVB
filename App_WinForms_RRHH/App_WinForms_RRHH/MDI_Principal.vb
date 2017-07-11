@@ -4,8 +4,8 @@ Imports App_WinForms_RRHH.Modelo
 Public Class MDI_Principal
 
     Private frmAlta As Form_Alta
-    Private frmBaja As Form_baja
-    Private frmLista As Form_Lista
+    Private frmLista As Form_Busqueda
+
     Private Sub Abrir_Formulario(Of TForm As {Form, New})(ByRef formulario As TForm)
         If formulario Is Nothing OrElse formulario.IsDisposed() Then
             formulario = New TForm()
@@ -17,14 +17,14 @@ Public Class MDI_Principal
         End If
         formulario.Activate()
     End Sub
-    Private Sub AltaToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AltaToolStripMenuItem.Click
+    Public Sub AbrirAlta()
         Abrir_Formulario(Of Form_Alta)(frmAlta)
     End Sub
-    Private Sub BajaToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles BajaToolStripMenuItem.Click
-        Abrir_Formulario(Of Form_baja)(frmBaja)
+    Private Sub AltaToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AltaToolStripMenuItem.Click
+        AbrirAlta()
     End Sub
-    Private Sub ListarToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles ListarToolStripMenuItem1.Click
-        Abrir_Formulario(Of Form_Lista)(frmlista)
+    Private Sub ListarToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ListarToolStripMenuItem.Click
+        Abrir_Formulario(Of Form_Busqueda)(frmLista)
     End Sub
     Private Sub tolAlta_Click(sender As Object, e As EventArgs) Handles tolAlta.Click
         AltaToolStripMenuItem_Click(sender, e)
@@ -40,31 +40,6 @@ Public Class MDI_Principal
         ChildForm.Text = "Ventana " & m_ChildFormNumber
 
         ChildForm.Show()
-    End Sub
-    Private Sub OpenFile(ByVal sender As Object, ByVal e As EventArgs) Handles OpenToolStripMenuItem.Click, OpenToolStripButton.Click
-        Dim OpenFileDialog As New OpenFileDialog
-        OpenFileDialog.InitialDirectory = My.Computer.FileSystem.SpecialDirectories.MyDocuments
-        OpenFileDialog.Filter = "Archivos de texto (*.csv)|*.csv|Todos los archivos (*.*)|*.*"
-        OpenFileDialog.CheckFileExists = True
-
-        If (OpenFileDialog.ShowDialog(Me) = System.Windows.Forms.DialogResult.OK) Then
-            Dim FileName As String = OpenFileDialog.FileName
-            EmpleadosFichero.nombreFichero = FileName
-            EmpleadosCRUD.Restaurar()
-            EmpleadosToolStripMenuItem.Enabled = True
-        End If
-    End Sub
-    Private Sub SaveAsToolStripMenuItem_Click(ByVal sender As Object, ByVal e As EventArgs) Handles SaveAsToolStripMenuItem.Click
-        Dim SaveFileDialog As New SaveFileDialog
-        SaveFileDialog.InitialDirectory = EmpleadosFichero.nombreFichero
-        SaveFileDialog.Filter = "Archivos de texto (*.csv)|*.csv|Todos los archivos (*.*)|*.*"
-
-        If (SaveFileDialog.ShowDialog(Me) = System.Windows.Forms.DialogResult.OK) Then
-            Dim FileName As String = SaveFileDialog.FileName
-
-            EmpleadosFichero.nombreFichero = FileName
-            EmpleadosCRUD.Grabar()
-        End If
     End Sub
     Private Sub ExitToolsStripMenuItem_Click(ByVal sender As Object, ByVal e As EventArgs) Handles ExitToolStripMenuItem.Click
         Me.Close()
@@ -132,11 +107,50 @@ Public Class MDI_Principal
             Next
         End If
     End Sub
+    Private empleadosFichero As New EmpleadosFichero
+    Private empleadosExcel As New EmpleadosExcel
+    Private Sub OpenFile(ByVal sender As Object, ByVal e As EventArgs) Handles OpenToolStripMenuItem.Click, OpenToolStripButton.Click
 
+        empleadosFichero.NombreFichero = DialogoAbrirFichero("csv")
+        EmpleadosCRUD.Restaurar(empleadosFichero)
+    End Sub
+    Private Function DialogoAbrirFichero(extension As String) As String
+        Dim OpenFileDialog As New OpenFileDialog
+        OpenFileDialog.InitialDirectory = My.Computer.FileSystem.SpecialDirectories.MyDocuments
+        OpenFileDialog.Filter = "Archivos de texto (*." & extension & ")|*." & extension & "|Todos los archivos (*.*)|*.*"
+        OpenFileDialog.CheckFileExists = True
+
+        If (OpenFileDialog.ShowDialog(Me) = System.Windows.Forms.DialogResult.OK) Then
+            EmpleadosToolStripMenuItem.Enabled = True
+            Return OpenFileDialog.FileName
+        Else
+            Return ""
+        End If
+    End Function
+    Private Sub SaveAsToolStripMenuItem_Click(ByVal sender As Object, ByVal e As EventArgs) Handles SaveAsToolStripMenuItem.Click
+
+        empleadosFichero.NombreFichero = DialogoGuardarFichero("csv")
+        EmpleadosCRUD.Grabar(empleadosFichero)
+    End Sub
+    Private Function DialogoGuardarFichero(extension As String) As String
+        Dim SaveFileDialog As New SaveFileDialog
+        SaveFileDialog.InitialDirectory = empleadosFichero.NombreFichero
+        SaveFileDialog.Filter = "Archivos de texto (*." & extension & ")|*." & extension & "|Todos los archivos (*.*)|*.*"
+
+        If (SaveFileDialog.ShowDialog(Me) = System.Windows.Forms.DialogResult.OK) Then
+            Return SaveFileDialog.FileName
+        Else
+            Return ""
+        End If
+    End Function
     Private Sub SaveToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SaveToolStripMenuItem.Click
 
-        EmpleadosCRUD.Grabar()
+        EmpleadosCRUD.Grabar(empleadosFichero)
     End Sub
+    Private Sub ImportarExcelToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ImportarExcelToolStripMenuItem.Click
 
+    End Sub
+    Private Sub ExportarExcelToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExportarExcelToolStripMenuItem.Click
 
+    End Sub
 End Class

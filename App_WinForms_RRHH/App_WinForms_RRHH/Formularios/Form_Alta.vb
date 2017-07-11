@@ -19,8 +19,8 @@ Public Class Form_Alta
             ' Asignamos valores
             nuevoEmpleado.nombre = txtNombre.Text
             nuevoEmpleado.apellidos = txtApellidos.Text
-            nuevoEmpleado.genero = cmbGenero.SelectedIndex + 1
-            nuevoEmpleado.categoria = domCategoria.SelectedIndex + 1
+            nuevoEmpleado.genero = CType(cmbGenero.SelectedIndex + 1, TipoGenero)
+            nuevoEmpleado.categoria = CType(domCategoria.SelectedIndex + 1, TipoCategoria)
             nuevoEmpleado.retribucionFija = numRetribucion.Value
 
             EmpleadosCRUD.Crear(nuevoEmpleado)
@@ -31,7 +31,6 @@ Public Class Form_Alta
             MessageBox.Show("Error al guardar")
         End Try
     End Sub
-
     Private Sub texto_TextChanged(sender As Object, e As EventArgs) _
         Handles txtNombre.TextChanged, txtApellidos.TextChanged,
         cmbGenero.SelectedValueChanged, domCategoria.SelectedItemChanged,
@@ -63,4 +62,5 @@ Public Class Form_Alta
 
         Me.MdiParent.Text = "Aplicación empleados"
     End Sub
+
 End Class
