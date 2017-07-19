@@ -5,6 +5,7 @@ Public Class MDI_Principal
 
     Private frmAlta As Form_Alta
     Private frmLista As Form_Busqueda
+    Friend empleadosCRUD As IEmpleadosCRUD
 
     Private Sub Abrir_Formulario(Of TForm As {Form, New})(ByRef formulario As TForm)
         If formulario Is Nothing OrElse formulario.IsDisposed() Then
@@ -109,10 +110,15 @@ Public Class MDI_Principal
     End Sub
     Private empleadosFichero As New EmpleadosFichero
     Private empleadosExcel As New EmpleadosExcel
+    Private empleadosAccess As New EmpleadosAccess
+
     Private Sub OpenFile(ByVal sender As Object, ByVal e As EventArgs) Handles OpenToolStripMenuItem.Click, OpenToolStripButton.Click
 
         empleadosFichero.NombreFichero = DialogoAbrirFichero("csv")
-        EmpleadosCRUD.Restaurar(empleadosFichero)
+        empleadosCRUD = New EmpleadosListaCRUD()
+        empleadosCRUD.EstablecerAvisarEnModificacion(AddressOf HabilitarMenusGuardarExportar)
+        empleadosCRUD.Restaurar(empleadosFichero)
+        HabilitarMenusGuardarExportar(True)
     End Sub
     Private Function DialogoAbrirFichero(extension As String) As String
         Dim OpenFileDialog As New OpenFileDialog
@@ -130,7 +136,7 @@ Public Class MDI_Principal
     Private Sub SaveAsToolStripMenuItem_Click(ByVal sender As Object, ByVal e As EventArgs) Handles SaveAsToolStripMenuItem.Click
 
         empleadosFichero.NombreFichero = DialogoGuardarFichero("csv")
-        EmpleadosCRUD.Grabar(empleadosFichero)
+        empleadosCRUD.Grabar(empleadosFichero)
     End Sub
     Private Function DialogoGuardarFichero(extension As String) As String
         Dim SaveFileDialog As New SaveFileDialog
@@ -145,12 +151,45 @@ Public Class MDI_Principal
     End Function
     Private Sub SaveToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SaveToolStripMenuItem.Click
 
-        EmpleadosCRUD.Grabar(empleadosFichero)
+        empleadosCRUD.Grabar(empleadosFichero)
     End Sub
     Private Sub ImportarExcelToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ImportarExcelToolStripMenuItem.Click
-
+        empleadosExcel.NombreFichero = DialogoAbrirFichero("xlsx")
+        empleadosCRUD = New EmpleadosListaCRUD()
+        empleadosCRUD.EstablecerAvisarEnModificacion(AddressOf HabilitarMenusGuardarExportar)
+        empleadosCRUD.Restaurar(empleadosExcel)
+        HabilitarMenusGuardarExportar(True)
     End Sub
     Private Sub ExportarExcelToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExportarExcelToolStripMenuItem.Click
 
+        empleadosExcel.NombreFichero = DialogoGuardarFichero("xlsx")
+        empleadosCRUD.Grabar(empleadosExcel)
+    End Sub
+    Private Sub HabilitarMenusGuardarExportar(estado As Boolean)
+        SaveAsToolStripMenuItem.Enabled = estado
+        SaveToolStripMenuItem.Enabled = estado
+        SaveToolStripButton.Enabled = estado
+        ExportarExcelToolStripMenuItem.Enabled = estado
+        ExportarAccesToolStripMenuItem.Enabled = estado
+    End Sub
+
+    Private Sub ImportarAccessToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ImportarAccessToolStripMenuItem.Click
+
+        empleadosAccess.NombreFichero = DialogoAbrirFichero("mdb")
+        empleadosCRUD = New EmpleadosAccessCRUD()
+        empleadosCRUD.EstablecerAvisarEnModificacion(AddressOf HabilitarMenusGuardarExportar)
+        empleadosCRUD.Restaurar(empleadosAccess)
+        HabilitarMenusGuardarExportar(True)
+    End Sub
+
+    Private Sub ExportarAccesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExportarAccesToolStripMenuItem.Click
+
+        empleadosAccess.NombreFichero = DialogoGuardarFichero("mdb")
+        empleadosCRUD.Grabar(empleadosAccess)
+    End Sub
+
+    Private Sub Generar10000ToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles Generar10000ToolStripMenuItem.Click
+        Dim generadorEmpleados As New EmpleadosGenerador()
+        empleadosCRUD.Restaurar(generadorEmpleados)
     End Sub
 End Class

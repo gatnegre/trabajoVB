@@ -22,9 +22,9 @@
     <DefineTrace>true</DefineTrace>
     <OutputPath>bin\Debug\</OutputPath>
     <DocumentationFile>App_WinForms_RRHH.xml</DocumentationFile>
-    <NoWarn>
-    </NoWarn>
-    <WarningsAsErrors>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036</WarningsAsErrors>
+    <NoWarn>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036</NoWarn>
+    <WarningsAsErrors>
+    </WarningsAsErrors>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -34,9 +34,9 @@
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
     <DocumentationFile>App_WinForms_RRHH.xml</DocumentationFile>
-    <NoWarn>
-    </NoWarn>
-    <WarningsAsErrors>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036</WarningsAsErrors>
+    <NoWarn>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036</NoWarn>
+    <WarningsAsErrors>
+    </WarningsAsErrors>
   </PropertyGroup>
   <PropertyGroup>
     <OptionExplicit>On</OptionExplicit>
@@ -45,7 +45,7 @@
     <OptionCompare>Binary</OptionCompare>
   </PropertyGroup>
   <PropertyGroup>
-    <OptionStrict>On</OptionStrict>
+    <OptionStrict>Off</OptionStrict>
   </PropertyGroup>
   <PropertyGroup>
     <OptionInfer>On</OptionInfer>
@@ -76,6 +76,8 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Modelo\EmpleadosPersistencia\EmpleadosBaseOleDB.vb" />
+    <Compile Include="Modelo\EmpleadosPersistencia\EmpleadosBaseImportador.vb" />
     <Compile Include="Formularios\Form_Alta.Designer.vb">
       <DependentUpon>Form_Alta.vb</DependentUpon>
     </Compile>
@@ -102,11 +104,16 @@
     </Compile>
     <Compile Include="Modelo\Constantes.vb" />
     <Compile Include="Modelo\Empleados\Empleado.vb" />
-    <Compile Include="Modelo\Empleados\EmpleadosCRUD.vb" />
-    <Compile Include="Modelo\Empleados\EmpleadosExcel.vb" />
-    <Compile Include="Modelo\Empleados\EmpleadosFichero.vb" />
+    <Compile Include="Modelo\EmpleadosPersistencia\EmpleadosAccess.vb" />
+    <Compile Include="Modelo\Empleados\EmpleadosAccessCRUD.vb" />
+    <Compile Include="Modelo\Empleados\EmpleadosListaCRUD.vb" />
+    <Compile Include="Modelo\EmpleadosPersistencia\EmpleadosExcel.vb" />
+    <Compile Include="Modelo\EmpleadosPersistencia\EmpleadosFichero.vb" />
+    <Compile Include="Modelo\EmpleadosPersistencia\EmpleadosGenerador.vb" />
+    <Compile Include="Modelo\Empleados\IEmpleadosCRUD.vb" />
     <Compile Include="Modelo\Enumerados.vb" />
-    <Compile Include="Modelo\IPersistenciaEmpleados.vb" />
+    <Compile Include="Modelo\EmpleadosPersistencia\IPersistenciaEmpleados.vb" />
+    <Compile Include="Modelo\UtilidadesBD.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
