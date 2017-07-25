@@ -78,8 +78,6 @@
         If fecha.Year = 2017 Then
             Me.Text += "¡Este mismo año!"
         End If
-
-
     End Sub
 
     Private Sub NuevoToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles NuevoToolStripMenuItem.Click
@@ -91,88 +89,95 @@
         nuevoBoton.Parent = Me
         nuevoBoton.BringToFront()
         AddHandler nuevoBoton.Click, AddressOf EliminarComponente
+
     End Sub
     Private Sub EliminarComponente(sender As Button, e As EventArgs)
         sender.Dispose()
     End Sub
-
     Private Sub MonthCalendar1_DateChanged(sender As Object, e As DateRangeEventArgs) Handles MonthCalendar1.DateChanged
-        DateTimePicker1.Value = MonthCalendar1.SelectionRange.Start
-        DateTimePicker2.Value = MonthCalendar1.SelectionRange.End
-    End Sub
 
+        DateTimePicker1.Value = MonthCalendar1.SelectionRange.Start
+
+        DateTimePicker2.Value = MonthCalendar1.SelectionEnd
+    End Sub
     Private Sub MostrarDiaSemana(dateTime As DateTimePicker, e As EventArgs) Handles DateTimePicker1.ValueChanged
         Select Case dateTime.Value.DayOfWeek
             Case DayOfWeek.Monday
-                LblDiaSemana.Text = "Lunes"
+                lblDiaSemana.Text = "Lunes"
             Case DayOfWeek.Tuesday
-                LblDiaSemana.Text = "Martes"
+                lblDiaSemana.Text = "Martes"
             Case DayOfWeek.Wednesday
-                LblDiaSemana.Text = "Miercoles"
+                lblDiaSemana.Text = "Miercoles"
             Case DayOfWeek.Thursday
-                LblDiaSemana.Text = "Jueves"
+                lblDiaSemana.Text = "J"
             Case DayOfWeek.Friday
-                LblDiaSemana.Text = "Viernes"
+                lblDiaSemana.Text = "V"
             Case DayOfWeek.Saturday
-                LblDiaSemana.Text = "Sabado"
+                lblDiaSemana.Text = "S"
             Case DayOfWeek.Sunday
-                LblDiaSemana.Text = "Domingo"
+                lblDiaSemana.Text = "D"
         End Select
     End Sub
-
     Private Sub MostrarComparativa(dateTime As DateTimePicker, e As EventArgs) Handles DateTimePicker1.ValueChanged, DateTimePicker2.ValueChanged
         If DateTimePicker1.Value.CompareTo(DateTimePicker2.Value) < 0 Then
-            LblComparacion.Text = "La primera fecha es menor"
+            lblComparacion.Text = "La primera fecha es menor"
         ElseIf DateTimePicker1.Value.CompareTo(DateTimePicker2.Value) > 0 Then
-            LblComparacion.Text = "La segunda fecha es menor"
+            lblComparacion.Text = "La segunda fecha es menor"
         Else
-            LblComparacion.Text = "Las fechas son iguales"
+            lblComparacion.Text = "Las fechas son iguales"
         End If
     End Sub
 
-    Private Sub BtnComparar_Click(sender As Object, e As EventArgs) Handles BtnComparar.Click
-        Dim resultadoComparacion As Integer = TextoA.Text.CompareTo(TextoB.Text)
+    Private Sub btnComparar_Click(sender As Object, e As EventArgs) Handles btnComparar.Click
+
+        Dim resultadoComparacion As Integer = txtTexto_A.Text.CompareTo(txtTexto_B.Text)
 
         If resultadoComparacion < 0 Then
-            LblComTxt.Text = "el primer texto es mayor"
+            lblCompTxt.Text = "El primer texto es mayor"
         ElseIf resultadoComparacion > 0 Then
-            LblComTxt.Text = "el primer texto es menor"
+            lblCompTxt.Text = "El primer texto es menor"
         Else
-            LblComTxt.Text = "los textos son iguales"
-
+            lblCompTxt.Text = "Los textos son iguales"
         End If
-
     End Sub
 
-    Private Sub BtnProvocador_Click(sender As Object, e As EventArgs) Handles BtnProvocador.Click
-        TextoA.BackColor = Color.Chartreuse
+    Private Sub btnProvocador_Click(sender As Object, e As EventArgs) Handles btnProvocador.Click
+        txtTexto_A.BackColor = Color.Chartreuse
     End Sub
-    Private Sub EventoProvocadp(sender As Object, e As EventArgs) Handles TextoA.BackColorChanged, TextoA.Enter
-        MessageBox.Show(Me, "Evento " & e.ToString() & vbCrLf & " desde " & sender.ToString(), "Evento provocado")
+    Private Sub EventoProvocado(sender As Object, e As EventArgs) Handles txtTexto_A.BackColorChanged, txtTexto_A.Enter
+        MessageBox.Show(Me,
+                        "Evento " & e.ToString() & vbCrLf &
+                        " desde " & sender.ToString(),
+                        "Evento provocado")
     End Sub
-
-    Private Sub TextoA_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TextoA.KeyPress
-        'Procesa solo las teclas numericas y las teclas de control
+    Private Sub TextBox_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtTexto_A.KeyPress
+        ' Procesa solo las teclas numéricas y las teclas de control
         If Not (Char.IsDigit(e.KeyChar) Or Char.IsControl(e.KeyChar)) Then
-            'Ignorar la tecla
+            ' Ignorar la tecla
             e.Handled = True
         End If
+
     End Sub
-    'char.toupper   
-    'Ejercicio convertir a mayusculas los caracteres de TextoB usando keypress
-    Private Sub Textob_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TextoB.KeyPress
-
-        If (Char.IsLetter(e.KeyChar)) Then
-
+    ' Char.ToUpper  / String.ToUpper / Char.IsLetter
+    ' Ejercicio: Convertir a mayusculas los caracteres de txtTexto_B usando KeyPress
+    Private Sub TextBox_B_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtTexto_B.KeyPress
+        If Char.IsLetter(e.KeyChar) Then
             e.KeyChar = Char.ToUpper(e.KeyChar)
         End If
+        ' txtTexto_B.Text = txtTexto_B.Text.ToUpper()
+        'If Char.IsLetter(e.KeyChar) Then
+        ' txtTexto_B.SelectedText = Char.ToUpper(e.KeyChar)
+        'e.Handled = True
+        'End If
     End Sub
-    Private Sub Textob_Keydown(sender As Object, e As KeyEventArgs) Handles TextoB.KeyDown
-        LBLPulsando.Text = "ABAJO"
-        LBLPulsando.Text += If(e.Shift, " MAYUS", "")
+
+    Private Sub txtTexto_B_KeyDown(sender As Object, e As KeyEventArgs) Handles txtTexto_B.KeyDown
+        lblPulsando.Text = "ABAJO " & e.KeyCode.ToString()
+        lblPulsando.Text += If(e.Shift, " MAYUS", "")
+
     End Sub
-    Private Sub Textob_Keyup(sender As Object, e As KeyEventArgs) Handles TextoB.KeyUp
-        LBLPulsando.Text = "Arriba"
-        LBLPulsando.Text += If(e.Shift, " MAYUS", "")
+    Private Sub txtTexto_b_Keyup(sender As Object, e As KeyEventArgs) Handles txtTexto_B.KeyUp
+        lblPulsando.Text = "ARRIBA " & e.KeyCode.ToString()
+        lblPulsando.Text += If(e.Shift, " MAYUS", "")
     End Sub
 End Class

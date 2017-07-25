@@ -4,13 +4,13 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{18DDE996-9AC2-4BE3-BD40-5F70A824932A}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
-    <StartupObject>App_4_Ejemplo_WinForm_ListBox.My.MyApplication</StartupObject>
-    <RootNamespace>App_4_Ejemplo_WinForm_ListBox</RootNamespace>
-    <AssemblyName>App_4_Ejemplo_WinForm_ListBox</AssemblyName>
+    <ProjectGuid>{7B408978-DCDA-4FFD-904A-8C853A863439}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <StartupObject>App_1_Ejemplos_VB_Basicos.Ejemplo_If_String</StartupObject>
+    <RootNamespace>App_1_Ejemplos_VB_Basicos</RootNamespace>
+    <AssemblyName>App_1_Ejemplos_VB_Basicos</AssemblyName>
     <FileAlignment>512</FileAlignment>
-    <MyType>WindowsForms</MyType>
+    <MyType>Console</MyType>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
@@ -21,7 +21,7 @@
     <DefineDebug>true</DefineDebug>
     <DefineTrace>true</DefineTrace>
     <OutputPath>bin\Debug\</OutputPath>
-    <DocumentationFile>App_4_Ejemplo_WinForm_ListBox.xml</DocumentationFile>
+    <DocumentationFile>App_1_Ejemplos_VB_Basicos.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -31,7 +31,7 @@
     <DefineTrace>true</DefineTrace>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
-    <DocumentationFile>App_4_Ejemplo_WinForm_ListBox.xml</DocumentationFile>
+    <DocumentationFile>App_1_Ejemplos_VB_Basicos.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
   </PropertyGroup>
   <PropertyGroup>
@@ -50,8 +50,6 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -64,33 +62,26 @@
     <Import Include="System.Collections" />
     <Import Include="System.Collections.Generic" />
     <Import Include="System.Data" />
-    <Import Include="System.Drawing" />
     <Import Include="System.Diagnostics" />
-    <Import Include="System.Windows.Forms" />
     <Import Include="System.Linq" />
     <Import Include="System.Xml.Linq" />
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FormComboListas.Designer.vb">
-      <DependentUpon>FormComboListas.vb</DependentUpon>
-    </Compile>
-    <Compile Include="FormComboListas.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FormEventosRaton.Designer.vb">
-      <DependentUpon>FormEventosRaton.vb</DependentUpon>
-    </Compile>
-    <Compile Include="FormEventosRaton.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FormPrincipal.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FormPrincipal.Designer.vb">
-      <DependentUpon>FormPrincipal.vb</DependentUpon>
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="Ejemplo_Adivinar_Numero.vb" />
+    <Compile Include="Ejemplo_ArcoTangente.vb" />
+    <Compile Include="Ejemplo_AreaCirculo.vb" />
+    <Compile Include="Ejemplo_Booleanos.vb" />
+    <Compile Include="Ejemplo_Calculadora.vb" />
+    <Compile Include="Ejemplo_Continue.vb" />
+    <Compile Include="Ejemplo_EdadIf.vb" />
+    <Compile Include="Ejemplo_EdadSelect.vb" />
+    <Compile Include="Ejemplo_IfNulo.vb" />
+    <Compile Include="Ejemplo_If_String.vb" />
+    <Compile Include="Ejemplo_Operador_If.vb" />
+    <Compile Include="Ejemplo_ReadLine.vb" />
+    <Compile Include="Ejemplo_TablaMultiplicar.vb" />
+    <Compile Include="Ejemplo_Velocidades.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -108,15 +99,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="FormComboListas.resx">
-      <DependentUpon>FormComboListas.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FormEventosRaton.resx">
-      <DependentUpon>FormEventosRaton.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FormPrincipal.resx">
-      <DependentUpon>FormPrincipal.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
